@@ -4,10 +4,15 @@
 // ******************************************
 //it's A function to make an Assertion
 const assert = require('assert');
+const User = require('../src/user');
 
 describe('Creating Records', () => {
     it('Saves a user', () => {
         //Create Actual Assertion
-        assert(1+1 === 3);
+         const joe = new User({
+             name: 'Joe'
+         });
+         //save this instance to DB
+         joe.save();
     });
 });
