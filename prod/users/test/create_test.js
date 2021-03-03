@@ -7,12 +7,19 @@ const assert = require('assert');
 const User = require('../src/user');
 
 describe('Creating Records', () => {
-    it('Saves a user', () => {
+    it('Saves a user', (done) => {
         //Create Actual Assertion
          const joe = new User({
              name: 'Joe'
          });
          //save this instance to DB
-         joe.save();
+         joe.save()
+             .then(() => {
+                // Has Joe Saved Successfully???
+                 //if joe saved Successfully fliped joe.isNew Flag
+                 assert(!joe.isNew);
+
+             });
+            done();
     });
 });
