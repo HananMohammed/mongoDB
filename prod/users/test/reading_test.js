@@ -16,7 +16,7 @@ describe('Reading Users Out of The database', () => {
     it('find all Users with a name of joe', (done) => {
         User.find({name: 'joe'})
             .then((users) => {
-                console.log(users);
+                assert(users[0]._id.toString() === joe.id.toString())
                 done();
             })
 
