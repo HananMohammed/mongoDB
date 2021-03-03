@@ -9,3 +9,11 @@ mongoose.connection
     .on('error', (error) => {
         console.warn('Warning', error)
     });
+
+//Ensure To Drop DB before Run Test
+
+beforeEach(() => {
+    //Find A Collection of Users And Drop All
+    // record before run test
+    mongoose.connection.collections.users.drop();
+})
