@@ -12,8 +12,12 @@ mongoose.connection
 
 //Ensure To Drop DB before Run Test
 
-beforeEach(() => {
+beforeEach((done) => {
     //Find A Collection of Users And Drop All
     // record before run test
-    mongoose.connection.collections.users.drop();
+    mongoose.connection.collections.users.drop(() => {
+        //drop Accepts CallBAck Fun that will be Excuted once it drops users
+        //Ready to Run Next test
+        done();
+    });
 })
