@@ -6,7 +6,10 @@ const Schema = Mongoose.Schema;
 
 //Create User Model
 const UserSchema = new Schema({
-    name: String,
+    name: {
+        type: String,
+        required: [true, 'Name Is Required'],
+    },
     postCount: Number,
 
 });
