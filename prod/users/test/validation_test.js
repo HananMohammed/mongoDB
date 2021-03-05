@@ -17,4 +17,14 @@ describe('Validating Records', () => {
         assert(message === 'Name Must be Longer than 2 characters')
 
     });
+    it('disallow ivalid records from being saved', function (done) {
+        const user = new User({name: 'AL'});
+        const validationResult = user.validateSync();
+        user.save()
+            .catch((validationResult) => {
+                const {message} = validationResult.errors.name;
+                assert(message === 'Name Must be Longer than 2 characters')
+                done();
+            })
+    });
 })
