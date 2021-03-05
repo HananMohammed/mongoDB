@@ -6,7 +6,7 @@ describe('Updating Record', function () {
     let joe ;
 
     beforeEach((done) => {
-        joe = new User({ name: 'Joe' })
+        joe = new User({ name: 'Joe', postCount:0 })
         joe.save()
            .then(() => done());
     });
@@ -21,35 +21,44 @@ describe('Updating Record', function () {
                 done();
             })
     }
-   it('Instance type using  Set n Save Methodology for Updating Record', (done) => {
-        joe.set('name','Alex')
-        assertName(joe.save(), done)
+   // it('Instance type using  Set n Save Methodology for Updating Record', (done) => {
+   //      joe.set('name','Alex')
+   //      assertName(joe.save(), done)
+   //
+   //
+   // })
+    //
+    // it('A model instance can update', (done) => {
+    //     assertName(joe.update({name: 'Alex'}), done)
+    // })
+    //
+    // it('A model Class Can Update', (done) => {
+    //     assert(
+    //         User.update({name: 'Joe'},{name: 'Alex'})
+    //         , done
+    //     )
+    // })
+    // it('A model Class Can Update one record', (done) => {
+    //     assert(
+    //         User.findOneAndUpdate({name: 'Joe'},{name: 'Alex'})
+    //         , done
+    //     )
+    // })
+    // it('A model Class Can find a record with Id and Update', (done) => {
+    //     assert(
+    //         User.findByIdAndDelete(joe._id,{name: 'Alex'})
+    //         , done
+    //     )
+    // })
 
-
-   })
-
-    it('A model instance can update', (done) => {
-        assertName(joe.update({name: 'Alex'}), done)
-    })
-
-    it('A model Class Can Update', (done) => {
-        assert(
-            User.update({name: 'Joe'},{name: 'Alex'})
-            , done
-        )
-    })
-    it('A model Class Can Update one record', (done) => {
-        assert(
-            User.findOneAndUpdate({name: 'Joe'},{name: 'Alex'})
-            , done
-        )
-    })
-    it('A model Class Can find a record with Id and Update', (done) => {
-        assert(
-            User.findByIdAndDelete(joe._id,{name: 'Alex'})
-            , done
-        )
-    })
+    it('A User Can Have Their postCount incremented by one ', function (done) {
+        User.updateOne({name: 'joe'},{$inc : { postCount:1 }})
+            .then(() => User.findOne({name: 'joe'}))
+            .then((user) => {
+                assert(user.postCount === 1);
+            });
+        done()
+    });
 });
 
 
