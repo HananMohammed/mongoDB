@@ -8,7 +8,13 @@ describe('Validating Records', () => {
         const validationResult = user.validateSync();
         const message = validationResult.errors.name.message
         console.log(message)
+    });
 
+    it('requires a user\'s name longger than 2 characters', function () {
+        const user = new User({name: 'AL'});
+        const validationResult = user.validateSync();
+        const {message} = validationResult.errors.name;
+        assert(message === 'Name Must be Longer than 2 characters')
 
     });
 })
