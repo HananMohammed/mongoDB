@@ -28,31 +28,31 @@ describe('Updating Record', function () {
 
    })
 
+    it('A model instance can update', (done) => {
+        assertName(joe.update({name: 'Alex'}), done)
+    })
 
+    it('A model Class Can Update', (done) => {
+        assert(
+            User.update({name: 'Joe'},{name: 'Alex'})
+            , done
+        )
+    })
+    it('A model Class Can Update one record', (done) => {
+        assert(
+            User.findOneAndUpdate({name: 'Joe'},{name: 'Alex'})
+            , done
+        )
+    })
+    it('A model Class Can find a record with Id and Update', (done) => {
+        assert(
+            User.findByIdAndDelete(joe._id,{name: 'Alex'})
+            , done
+        )
+    })
 });
 
-it('A model instance can update', (done) => {
-    assertName(joe.update({name: 'Alex'}), done)
-})
 
-it('A model Class Can Update', (done) => {
-    assert(
-        User.update({name: 'Joe'},{name: 'Alex'})
-        , done
-    )
-})
-it('A model Class Can Update one record', (done) => {
-    assert(
-        User.findOneAndUpdate({name: 'Joe'},{name: 'Alex'})
-        , done
-    )
-})
-it('A model Class Can find a record with Id and Update', (done) => {
-    assert(
-        User.findByIdAndDelete(joe._id,{name: 'Alex'})
-        , done
-    )
-})
 //preferable way for update
 // function maybeUpdateName(user){
 //
