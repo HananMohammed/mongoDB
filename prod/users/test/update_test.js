@@ -11,20 +11,30 @@ describe('Updating Record', function () {
            .then(() => done());
     });
 
-   it('Instance type using  Set n Save Methodology for Updating Record', (done) => {
-        joe.set('name','Alex')
-        joe.save()
+    function assertName(operation, done)
+    {
+        operation
             .then(() => User.find({}))
             .then((users) => {
                 assert(users.length === 1);
-                assert(users[0].name === 'Alex')
+                assert(users[0].name === 'POP')
                 done();
             })
+    }
+   it('Instance type using  Set n Save Methodology for Updating Record', (done) => {
+        joe.set('name','Alex')
+        assertName(joe.save(), done)
+
 
    })
 
 
 });
+
+it('A model instance can update', (done) => {
+    assertName(joe.update({name: 'Alex'}), done)
+})
+
 
 //preferable way for update
 // function maybeUpdateName(user){
