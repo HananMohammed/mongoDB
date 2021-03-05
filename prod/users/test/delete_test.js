@@ -20,8 +20,8 @@ describe('Deleting a User', () => {
         .then(() => User.findOne({name: 'Joe'}) )
         .then((user) => {
             assert(user === null);
-            done();
         })
+        done();
     });
 
     it('Class Method remove', (done) => {
