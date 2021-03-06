@@ -20,11 +20,20 @@ before((done) => {
 //Ensure To Drop DB before Run Test
 
 beforeEach((done) => {
-    //Find A Collection of Users And Drop All
-    // record before run test
-    mongoose.connection.collections.users.drop(() => {
-        //drop Accepts CallBAck Fun that will be Excuted once it drops users
-        //Ready to Run Next test
-        done();
-    });
+    // //Find A Collection of Users And Drop All
+    // // record before run test
+    // mongoose.connection.collections.users.drop(() => {
+    //     //drop Accepts CallBAck Fun that will be Excuted once it drops users
+    //     //Ready to Run Next test
+    //     done();
+    // });
+
+    const {users, comments, blogPosts} = mongoose.connection.collections;
+    users.drop(() => {
+        comments.drop(()=>{
+            blogPosts.drop(() => {
+                done();
+            })
+        })
+    })
 })
