@@ -51,7 +51,7 @@ describe('Updating Record', function () {
     //     )
     // })
 
-    it('A User Can Have Their postCount incremented by one ', function (done) {
+    xit('A User Can Have Their postCount incremented by one ', function (done) {
         User.updateOne({name: 'joe'},{$inc : { postCount:1 }})
             .then(() => User.findOne({name: 'joe'}))
             .then((user) => {

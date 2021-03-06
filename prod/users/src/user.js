@@ -15,8 +15,13 @@ const UserSchema = new Schema({
         },
 
     },
-    postCount: Number,
-    posts: [PostSchema]
+     posts: [PostSchema]
+});
+
+//define virtual field
+UserSchema.virtual('postCount').get(function () {
+   // console.log('Hi!!!!!!!!!!')
+    return this.posts.length;
 });
 
 const User = Mongoose.model('user', UserSchema);
