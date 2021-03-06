@@ -15,7 +15,8 @@ const UserSchema = new Schema({
         },
 
     },
-     posts: [PostSchema]
+     posts: [PostSchema],
+    likes: Number
 });
 
 //define virtual field
