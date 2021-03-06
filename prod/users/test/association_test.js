@@ -22,14 +22,37 @@ describe('Associations', () => {
 
     });
 
-    it.only('Saves a relation between a user and a blogPost ',  (done) => {
+    it('Saves a relation between a user and a blogPost ',  (done) => {
 
         User.findOne({name: 'Joe'})
             .populate('blogPosts')
             .then((user) => {
-                console.log(user);
-                console.log(user.blogPosts[0]);
-                done();
+               // console.log(user);
+               // console.log(user.blogPosts[0].title );
+                assert(user.blogPosts[0].title === 'I Love JS')
             });
+        done();
     });
+
+    it('saves a full relation tree', (done) => {
+        User.findOne({name: 'Joe'})
+            .populate({
+                //object of a bunch of configuration options
+                path: 'blogPosts',
+                populate: {
+                    path: 'comments',
+                    model:'comment',
+                    populate:{
+                        path:'user',
+                        model:'user'
+                    }
+                }
+            })
+            .then((user) => {
+                console.log(user.blogPosts[0].comment[0]);
+                done();
+
+            })
+    });
+
 })
