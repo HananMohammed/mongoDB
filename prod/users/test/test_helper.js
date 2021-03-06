@@ -28,10 +28,12 @@ beforeEach((done) => {
     //     done();
     // });
 
-    const {users, comments, blogPosts} = mongoose.connection.collections;
+
+    //You can't drop multiple of collection at the same time
+    const { users, comments, blogposts } = mongoose.connection.collections;
     users.drop(() => {
         comments.drop(()=>{
-            blogPosts.drop(() => {
+            blogposts.drop(() => {
                 done();
             })
         })
